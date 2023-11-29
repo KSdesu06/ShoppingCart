@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.OutlinedButton
@@ -80,6 +81,10 @@ class AddItemScreen : Screen {
             Spacer(Modifier.height(30.dp))
             OutlinedButton(
                 onClick = {  },
+                colors = ButtonDefaults.outlinedButtonColors(
+                    backgroundColor = Color.White,
+                    contentColor = Color.Black
+                )
             ) {
                 Text(text = "Add Item")
             }
