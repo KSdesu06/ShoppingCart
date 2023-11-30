@@ -1,0 +1,17 @@
+CREATE TABLE item_table (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    price INTEGER NOT NULL
+);
+
+getItems:
+SELECT * FROM item_table;
+
+getItemById:
+SELECT * FROM item_table WHERE id = :id;
+
+insertItem:
+INSERT INTO item_table (id, name, price) VALUES (?, ?, ?);
+
+deleteItem:
+DELETE FROM item_table WHERE id = ?;

@@ -61,6 +61,15 @@ kotlin {
         }
         iosMain.dependencies {
             implementation("app.cash.sqldelight:native-driver:2.0.0")
+            implementation(libs.stately.common)
+        }
+    }
+}
+
+sqldelight {
+    databases {
+        create("ItemDatabase") {
+            packageName.set("com.example.kat.database")
         }
     }
 }

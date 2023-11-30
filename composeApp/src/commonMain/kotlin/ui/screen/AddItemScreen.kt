@@ -31,17 +31,28 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.bottomSheet.LocalBottomSheetNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import domain.model.Item
+import item.ItemEvent
+import item.ItemState
 import ui.component.TextFieldComponent
 
-class AddItemScreen : Screen {
+class AddItemScreen(
+    private val newItem: Item?,
+    private val onEvent: (ItemEvent) -> Unit
+) : Screen {
 
     @Composable
     override fun Content() {
-        AddItemScreen()
+        AddItem(newItem = newItem, onEvent = onEvent)
     }
 
     @Composable
-    fun AddItemScreen(modifier: Modifier = Modifier, backgroundColor: Color = Color.Black) {
+    fun AddItem(
+        modifier: Modifier = Modifier,
+        backgroundColor: Color = Color.Black,
+        newItem: Item?,
+        onEvent: (ItemEvent) -> Unit
+    ) {
 
         var name by remember { mutableStateOf("") }
         var price by remember { mutableStateOf("") }
@@ -66,29 +77,28 @@ class AddItemScreen : Screen {
         ) {
 
             TextFieldComponent(
-                value = name,
-                onValueChange = { name = it },
+                value = newItem?.name ?: "",
+                onValueChange = { onEvent(ItemEvent.OnNameChanged(it)) },
                 placeholder = { Text(text = "Enter Name") },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
             )
             Spacer(Modifier.height(16.dp))
             TextFieldComponent(
-                value = price,
-                onValueChange = { price = it },
+                value = newItem?.price.toString(),
+                onValueChange = { onEvent(ItemEvent.OnPriceChanged(it)) },
                 placeholder = { Text(text = "Enter Price") },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
             )
             Spacer(Modifier.height(30.dp))
             OutlinedButton(
-                onClick = {  },
+                onClick = { onEvent(ItemEvent.SaveItem) },
                 colors = ButtonDefaults.outlinedButtonColors(
                     backgroundColor = Color.White,
                     contentColor = Color.Black
                 )
             ) {
-                Text(text = "Add Item")
+                Text(text = "Save Item")
             }
         }
     }
-
 }

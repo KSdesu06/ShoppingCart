@@ -9,22 +9,27 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import domain.model.Item
+import kotlinx.coroutines.Delay
 
 @Composable
-fun ItemListComponent() {
+fun ItemListComponent(
+    modifier: Modifier = Modifier,
+    item: Item
+) {
     Column {
         Box {
             Row(
-                modifier = Modifier
+                modifier = modifier
                     .fillMaxWidth()
                     .padding(horizontal = 20.dp),
             ) {
                 Text(
-                    text = "Item Name",
+                    text = "${item.name}",
                     modifier = Modifier.weight(1f)
                 )
                 Text(
-                    text = "Item Price",
+                    text = "${item.price}",
                     modifier = Modifier.weight(1f)
                 )
             }
